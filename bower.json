@@ -1,0 +1,22 @@
+{
+  "name": "Web",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Tasky/Web",
+  "authors": [
+    "Tim Slot <tim@tasky.nl>",
+    "Nanne Wielinga <nanne@tasky.nl>"
+  ],
+  "description": "Web interface of Tasky",
+  "main": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.2.14"
+  }
+}

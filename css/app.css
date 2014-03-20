@@ -1,0 +1,14 @@
+.navbar {
+    margin-top: 20px;
+    background: #ffe183;
+}
+
+.navbar li.active a {
+    background-color: #ac2925 !important;
+    color: #ffffff !important;
+}
+
+.navbar li.open a.dropdown-toggle {
+    background-color: #FFEF7B !important;
+    /*color: #ffffff !important;*/
+}
