@@ -1,0 +1,13 @@
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#/projects">Projecten</a></li>
+    <li class="active">Aanmaken</li>
+</ol>
+
+<form role="form">
+    <div class="form-group">
+        <label for="projectName">Project naam</label>
+        <input type="text" ng-model="projectName" class="form-control" id="projectName" placeholder="Naam van jouw project">
+    </div>
+    <button class="btn btn-default" ng-click="save()">{{ action }}</button>
+</form>
