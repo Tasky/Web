@@ -20,3 +20,10 @@
     </div>
     <br />
 </div>
+
+<div ng-show="!tasks.length">
+    <p>Geen taken gevonden.</p>
+</div>
+
+
+<a href="#/projects/{{project.id}}/task" class="btn btn-primary">Nieuwe taak</a>
