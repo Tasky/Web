@@ -1,3 +1,4 @@
+var url = 'http://localhost:8080';
 var tasky = angular.module('tasky', ['ngRoute', 'ui.bootstrap'])
     .config(function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(false);
