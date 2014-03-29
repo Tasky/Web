@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#/projects">Project</a></li>
+    <li><a href="#/projects">Taak</a></li>
+    <li class="active">Aanmaken</li>
+</ol>
+
+<form role="form">
+    <div class="form-group">
+        <label for="taskName">Taak naam</label>
+        <input type="text" ng-model="taskName" class="form-control" id="taskName" required autofocus placeholder="Naam van de taak">
+    </div>
+    <button class="btn btn-default" ng-click="save()">{{ action }}</button>
+</form>

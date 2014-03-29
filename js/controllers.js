@@ -22,6 +22,11 @@ var tasky = angular.module('tasky', ['ngRoute', 'ui.bootstrap'])
                 templateUrl: "templates/tasks.html"
             })
 
+            .when('/projects/:id/task', {
+                controller: 'TaskNew',
+                templateUrl: 'templates/tasks/new.html'
+            })
+
             .otherwise({
                 redirectTo: '/projects'
             });
