@@ -22,7 +22,7 @@ tasky.controller('TaskNew', ['$scope', '$routeParams', '$http',
                 return;
             }
 
-            $http.post('http://tasky.nl/api/project/'+$routeParams.id+'/task', {
+            $http.post(url+'/project/'+$routeParams.id+'/task', {
                 name: $scope.taskName
             }).success(function(data) {
                 window.location = '#/projects/'+$routeParams.id;
