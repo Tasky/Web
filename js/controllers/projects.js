@@ -24,7 +24,7 @@ tasky.controller('ProjectsNew', ['$scope', '$routeParams', '$http',
                 return;
             }
 
-            $http.post(url+'project', {
+            $http.post(url+'/project', {
                 name: $scope.projectName
             }).success(function(data) {
                 window.location = '#/projects/'+data;
