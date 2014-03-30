@@ -72,6 +72,11 @@ tasky.controller('Activities', ['$scope', '$routeParams', '$http', '$interval', 
     $http.get(url+'/project/'+$routeParams.id+'/').success(function(data) {
         $scope.project = data;
         $scope.tasks = data.tasks;
+    }).error(function(data){
+        if(localStorage) {
+            $scope.project = JSON.parse(localStorage.getItem('project-' + $routeParams.id));
+            $scope.tasks = JSON.parse(localStorage.getItem('tasks-' + $routeParams.id));
+        }
     });
 
     $http.get(url+'/project/'+$routeParams.id+'/task/'+$routeParams.taskid).success(function(data) {
@@ -89,6 +94,13 @@ tasky.controller('Activities', ['$scope', '$routeParams', '$http', '$interval', 
         }
         $scope.task = data;
         $scope.task.activities.reverse();
+        if(localStorage) localStorage.setItem('task-'+$routeParams.taskid, JSON.stringify(data));
+    }).error(function(data){
+        if(localStorage)  {
+            $scope.task = JSON.parse(localStorage.getItem('task-'+$routeParams.id));
+            console.log(JSON.parse(localStorage.getItem('task-'+$routeParams.id)));
+            //$scope.tasks.activities.reverse();
+        }
     });
 
     function setGeo(data) {
