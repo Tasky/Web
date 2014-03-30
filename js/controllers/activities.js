@@ -1,62 +1,60 @@
+
+
 tasky.controller('Activities', ['$scope', '$routeParams', '$http', '$interval', function($scope, $routeParams, $http, $interval) {
     $scope.name = "Activities";
     $scope.params = $routeParams;
-
 
     var started = false;
     // http://tasky.nl/api/project/3
     $scope.action = 'play';
     $scope.currenttime = 0;
 
+    $scope.new = {
+//        type: "Werk",
+        startTime: new Date(),
+        endTime: new Date()
+    };
+
     var ival;
     var sec = 0;
 
-    var calculateTime = function() {
-        function padLeft(nr, n, str){
-            return new Array(n-String(nr).length+1).join(str||'0')+nr;
+    $scope.updateTime = function() {
+        var diff = $scope.new.endTime - $scope.new.startTime;
+
+        if(!isNaN(diff)) {
+            sec = Math.floor(Math.abs(diff / 1000));
         }
-
-        var hour = Math.floor(sec / (60*60));
-        var min = Math.floor(sec / 60);
-        $scope.currenttime = padLeft(hour,2) + ":" + padLeft(min, 2) + ":" + padLeft(sec % 60, 2);
-    };
-
-    $scope.edit = function() {
-
-        var diff = $scope.stoptime - $scope.starttime;
-
-        sec = Math.abs(diff / 1000);
-        console.log(sec);
-
-        calculateTime();
-    };
-
-    $scope.save = function() {
-        alert('afsddsaf');
     };
 
     $scope.timer = function() {
-        var today=new Date();
         if($scope.action == 'play') {
-            if(!started) {
-                $scope.starttime = today;
-                started = true;
-            }
+            $scope.new.startTime = new Date();
+            $scope.new.endTime = new Date();
+            $scope.task.activities.reverse();
+            $scope.task.activities.push($scope.new);
+            $scope.task.activities.reverse();
+
             $scope.action = 'pause';
 
             ival = $interval(function() {
                 sec++;
-                calculateTime();
-            }, 1000);
+                $scope.new.endTime = new Date();
+                if(sec % 60 == 0 && sec >= 60) {
+                    if(!$scope.new.hasOwnProperty('id')) {
+                        $http.post(url + '/project/' + $routeParams.id + '/task/' + $routeParams.taskid+'/activity', $scope.new).success(function (data) {
+                            $scope.new.id = data;
+                        });
+                    } else {
+                        $http.put(url + '/project/' + $routeParams.id + '/task/' + $routeParams.taskid+'/activity', $scope.new);
+                    }
+                }
 
+            }, 1000);
         } else {
             $interval.cancel(ival);
-            $scope.stoptime = today;
             $scope.action = 'play';
         }
     };
-
-    calculateTime();
 
     $http.get(url+'/project/'+$routeParams.id+'/').success(function(data) {
         $scope.project = data;
@@ -64,12 +62,18 @@ tasky.controller('Activities', ['$scope', '$routeParams', '$http', '$interval', 
     });
 
     $http.get(url+'/project/'+$routeParams.id+'/task/'+$routeParams.taskid).success(function(data) {
+        for (var i = 0; i < data.activities.length; i++) {
+            var act = data.activities[i];
+            act.startTime = new Date(act.startTime);
+            act.endTime = new Date(act.endTime);
+        }
         $scope.task = data;
+        $scope.task.activities.reverse();
     });
 
     function setGeo(data) {
-        $scope.lat = data.coords.latitude;
-        $scope.lon = data.coords.longitude;
+        $scope.new.lat = data.coords.latitude;
+        $scope.new.lon = data.coords.longitude;
     }
 
     function geoFail() {
@@ -79,8 +83,8 @@ tasky.controller('Activities', ['$scope', '$routeParams', '$http', '$interval', 
     }
 
     function disableGeo(){
-        $scope.lat = undefined;
-        $scope.lon = undefined;
+        $scope.new.lat = undefined;
+        $scope.new.lon = undefined;
     }
 
     $scope.toggleGeo = function(elem) {

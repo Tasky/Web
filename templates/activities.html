@@ -6,69 +6,96 @@
 </ol>
 
 <div>
-    <h1>{{task.name}} <small>Activiteiten</small></h1>
+    <!--<h1>{{project.name}} <small>Project</small></h1>-->
+    <!--<h2>{{task.name}} <small>Taak</small></h2>-->
+
+    <h3>Toevoegen</h3>
 
     <form role="form">
         <div class="form-group">
-            <span style="font-size: 30px;">{{ currenttime }}</span>
-
-
-            <label>
-                Start
-                <input ng-keypress="edit()" ng-change="edit()" class="form-control" value="{{ starttime | date: 'H:m:ss' }}" type="time">
-            </label>
-
-            <label>
-                Stop
-                <input ng-change="edit()" class="form-control" value="{{ stoptime | date: 'H:m:ss' }}" type="time">
-            </label>
-
-            <label>
-                Pauze (in minuten)
-                <input type="number" class="form-control">
-            </label>
-
-
-
-            <button ng-click="timer()" class="btn btn-success glyphicon glyphicon-{{ action }}" style="font-size: 30px;"></button>
-
-            <button class="btn btn-primary" ng-click="save()">Opslaan</button>
-
+            <!--<label>-->
+                <!--Type:-->
+                <!--<select class="form-control" ng-model="new.type">-->
+                    <!--<option>Werk</option>-->
+                    <!--<option>Telefoon</option>-->
+                    <!--<option>Meeting</option>-->
+                <!--</select></label>-->
 
             <button ng-init="geoIsActive = false"
                     ng-class="{'btn': !geoIsActive, 'btn btn-success': geoIsActive}"
                     ng-click="geoIsActive = !geoIsActive;toggleGeo(this);"
                     id="geo-btn"
                     class="btn glyphicon glyphicon-map-marker"></button>
-
         </div>
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="form-group">
+                    <fieldset>
+                        <label>
+                            Timer:<br>
+                            <button
+                                    ng-click="timer()"
+                                    class="btn btn-success glyphicon glyphicon-{{ action }}"
+                                    style="font-size: 38px;"></button>
+                            <p class="help-block">Bij het klikken op de timer worden de tijden gereset.</p>
+                        </label>
+
+                    </fieldset>
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+                <fieldset disabled>
+                    <label style="margin-right: 20px;">
+                        Start:
+                        <div ng-model="new.startTime" ng-change="updateTime()"> <!-- ng-change="updateTime() -->
+                            <timepicker show-meridian="false"></timepicker>
+                        </div>
+                    </label>
+
+                    <label>
+                        Einde:
+                        <div ng-model="new.endTime" ng-change="updateTime()">
+                            <timepicker show-meridian="false"></timepicker>
+                        </div>
+                    </label>
+                </fieldset>
+            </div>
+        </div>
+        <div class="form-group">
+        <label>
+            Totaal:
+            <span style="font-size: 30px;">{{ (new.endTime - new.startTime) | longness}}</span>
+        </label>
+        <!--<button class="btn btn-primary" ng-click="save()" style="float: right;">Opslaan</button>-->
+        </div>
+
     </form>
 
-    <table class="table">
+
+    <h3>Activiteiten</h3>
+    <table class="table table-condensed table-striped table-bordered">
+        <thead>
         <tr>
-            <th>la</th>
-            <th>laa</th>
-            <th>laaa</th>
-            <th>laaaa</th>
+            <th>Van</th>
+            <th>Tot</th>
+            <th>Totaal</th>
         </tr>
+        </thead>
+        <tbody ng-repeat="activity in task.activities">
         <tr>
-            <td>#1</td>
-            <td>blaat</td>
-            <td>blaat</td>
-            <td>blaat</td>
+            <td>{{ activity.startTime | date: 'MMM d, HH:mm:ss'}}</td>
+            <td>{{ activity.endTime | date: 'MMM d, HH:mm:ss' }}</td>
+            <td>
+                {{ (activity.endTime - activity.startTime) | longness: 'h:m'}}
+            </td>
+            <!--<td>-->
+                <!--<button class="btn btn-danger btn-sm">Verwijderen</button>-->
+            <!--</td>-->
         </tr>
-        <tr>
-            <td>#2</td>
-            <td>blaat</td>
-            <td>blaat</td>
-            <td>blaat</td>
-        </tr>
-        <tr>
-            <td>#3</td>
-            <td>blaat</td>
-            <td>blaat</td>
-            <td>blaat</td>
-        </tr>
+        </tbody>
     </table>
+
 
 </div>

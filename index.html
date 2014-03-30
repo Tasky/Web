@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <!--<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>-->
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
 
     <script src="js/controllers.js"></script>
@@ -15,10 +16,11 @@
     <script src="js/controllers/tasks.js"></script>
     <script src="js/controllers/activities.js"></script>
     <script src="js/controllers/users.js"></script>
+    <script src="js/filters/longness.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="navbar navbar-default" role="navigation">
+    <div class="container" id="container">
+        <div class="navbar navbar-default" role="navigation" id="navbar">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -50,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div ng-view></div>
+        <div ng-view id="view"></div>
     </div>
 </body>
 </html>
