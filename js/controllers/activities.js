@@ -66,4 +66,28 @@ tasky.controller('Activities', ['$scope', '$routeParams', '$http', '$interval', 
     $http.get(url+'/project/'+$routeParams.id+'/task/'+$routeParams.taskid).success(function(data) {
         $scope.task = data;
     });
+
+    function setGeo(data) {
+        $scope.lat = data.coords.latitude;
+        $scope.lon = data.coords.longitude;
+    }
+
+    function geoFail() {
+        angular.element(document.getElementById('geo-btn')).removeClass('btn-success');
+        angular.element(document.getElementById('geo-btn')).addClass('btn-danger');
+        disableGeo();
+    }
+
+    function disableGeo(){
+        $scope.lat = undefined;
+        $scope.lon = undefined;
+    }
+
+    $scope.toggleGeo = function(elem) {
+        if($scope.geoIsActive) {
+            if(navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(setGeo, geoFail);
+        }else
+            disableGeo();
+    }
 }]);
