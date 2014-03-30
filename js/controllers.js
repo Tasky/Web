@@ -2,7 +2,7 @@ var url;
 //url = 'http://localhost:8080';
 url = 'http://tasky.nl/api';
 
-var tasky = angular.module('tasky', ['ngRoute', 'ui.bootstrap'])
+var tasky = angular.module('tasky', ['ngRoute', 'ui.bootstrap', 'leaflet-directive'])
     .config(function($routeProvider, $locationProvider, $httpProvider) {
         $locationProvider.html5Mode(false);
     })

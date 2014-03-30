@@ -9,6 +9,19 @@ tasky.controller('Activities', ['$scope', '$routeParams', '$http', '$interval', 
     $scope.action = 'play';
     $scope.currenttime = 0;
 
+    $scope.map = {
+        center: {
+            lat: 52.3167,
+            lng: 5.5500,
+            zoom: 7
+        },
+        markers: [],
+        defaults: {
+            scrollWheelZoom: false,
+            tileLayer: "https://{s}.tiles.mapbox.com/v3/examples.map-9ijuk24y/{z}/{x}/{y}.png"
+        }
+    };
+
     $scope.new = {
 //        type: "Werk",
         startTime: new Date(),
@@ -66,6 +79,13 @@ tasky.controller('Activities', ['$scope', '$routeParams', '$http', '$interval', 
             var act = data.activities[i];
             act.startTime = new Date(act.startTime);
             act.endTime = new Date(act.endTime);
+
+            $scope.map.markers.push({
+                lat: act.lat,
+                lng: act.lon,
+                focus: false,
+                draggable: false
+            });
         }
         $scope.task = data;
         $scope.task.activities.reverse();
