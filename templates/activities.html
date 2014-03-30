@@ -42,8 +42,6 @@
 
                     </fieldset>
                 </div>
-
-
             </div>
             <div class="col-md-6">
                 <fieldset disabled>
@@ -89,6 +87,9 @@
             <td>{{ activity.endTime | date: 'MMM d, HH:mm:ss' }}</td>
             <td>
                 {{ (activity.endTime - activity.startTime) | longness: 'h:m'}}
+
+                <span ng-if="!activity.id" class="label label-warning">Nog niet online</span>
+
             </td>
             <!--<td>-->
                 <!--<button class="btn btn-danger btn-sm">Verwijderen</button>-->
