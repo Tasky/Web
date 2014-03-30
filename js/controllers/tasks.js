@@ -15,7 +15,12 @@ tasky.controller('TaskController', ['$scope', '$routeParams', '$http',
 tasky.controller('TaskNew', ['$scope', '$routeParams', '$http',
     function($scope, $routeParams, $http) {
         $scope.action = 'Taak Aanmaken';
-        console.log();
+
+        $http.get(url+'/project/'+$routeParams.id+'/').success(function(data) {
+            $scope.project = data;
+            $scope.tasks = data.tasks;
+        });
+
         $scope.save = function() {
             console.log("SAVE");
             if($scope.taskName == null || $scope.taskName == "") {

@@ -1,0 +1,34 @@
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#/projects">Projecten</a></li>
+    <li><a href="#/projects/{{ project.id }}">{{ project.name }}</a></li>
+    <li class="active">{{task.name}}</li>
+</ol>
+
+<div>
+    <h1>{{task.name}} <small>Activiteiten</small></h1>
+
+    <form role="form">
+        <div class="form-group">
+            <span style="font-size: 30px;">{{ time }}</span>
+
+
+            <label>
+                Start
+                <input class="form-control" value="{{ starttime }}" type="time">
+            </label>
+
+            <label>
+                Stop
+                <input class="form-control" value="{{ stoptime }}" type="time">
+            </label>
+
+
+            <button ng-click="timer()" class="btn btn-success glyphicon glyphicon-{{ action }}" style="font-size: 30px;"></button>
+
+
+            <button class="btn glyphicon glyphicon-map-marker"></button>
+
+        </div>
+    </form>
+</div>
