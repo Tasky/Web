@@ -2,7 +2,10 @@ tasky.controller('ProjectsList', ['$scope', '$routeParams', '$http',
     function($scope, $routeParams, $http) {
         $http.get(url+'/projects').success(function(data) {
             $scope.projects = data;
-            console.log(data);
+            if(localStorage) localStorage.setItem('projects', JSON.stringify(data));
+        }).error(function(data){
+            if(localStorage) $scope.projects = JSON.parse(localStorage.getItem('projects'));
+            console.log('error');
         });
 
         $scope.delete = function(id) {

@@ -1,14 +1,19 @@
 tasky.controller('TaskController', ['$scope', '$routeParams', '$http',
     function($scope, $routeParams, $http) {
-        console.log($routeParams);
         $http.get(url+'/project/'+$routeParams.id+'/').success(function(data) {
 
-
-            console.log(data);
             $scope.project = data;
             $scope.tasks = data.tasks;
 
-
+            if(localStorage) {
+                localStorage.setItem('project-'+$routeParams.id, JSON.stringify(data));
+                localStorage.setItem('tasks-'+$routeParams.id, JSON.stringify(data.tasks));
+            }
+        }).error(function(data){
+            if(localStorage) {
+                $scope.project = JSON.parse(localStorage.getItem('project-'+$routeParams.id));
+                $scope.tasks = JSON.parse(localStorage.getItem('tasks-'+$routeParams.id));
+            }
         });
     }]);
 
