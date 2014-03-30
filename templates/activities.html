@@ -27,7 +27,11 @@
             <button ng-click="timer()" class="btn btn-success glyphicon glyphicon-{{ action }}" style="font-size: 30px;"></button>
 
 
-            <button class="btn glyphicon glyphicon-map-marker"></button>
+            <button ng-init="geoIsActive = false"
+                    ng-class="{'btn': !geoIsActive, 'btn btn-success': geoIsActive}"
+                    ng-click="geoIsActive = !geoIsActive;toggleGeo(this);"
+                    id="geo-btn"
+                    class="btn glyphicon glyphicon-map-marker"></button>
 
         </div>
     </form>
