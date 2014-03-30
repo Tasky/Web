@@ -10,21 +10,23 @@
 
     <form role="form">
         <div class="form-group">
-            <span style="font-size: 30px;">{{ time }}</span>
+            <span style="font-size: 30px;">{{ currenttime }}</span>
 
 
             <label>
                 Start
-                <input class="form-control" value="{{ starttime }}" type="time">
+                <input class="form-control" value="{{ starttime | date: 'H:m:ss' }}" type="time">
             </label>
 
             <label>
                 Stop
-                <input class="form-control" value="{{ stoptime }}" type="time">
+                <input class="form-control" value="{{ stoptime | date: 'H:m:ss' }}" type="time">
             </label>
 
 
             <button ng-click="timer()" class="btn btn-success glyphicon glyphicon-{{ action }}" style="font-size: 30px;"></button>
+
+            <button class="btn btn-primary">Opslaan</button>
 
 
             <button class="btn glyphicon glyphicon-map-marker"></button>
