@@ -15,22 +15,56 @@
 
             <label>
                 Start
-                <input class="form-control" value="{{ starttime | date: 'H:m:ss' }}" type="time">
+                <input ng-keypress="edit()" ng-change="edit()" class="form-control" value="{{ starttime | date: 'H:m:ss' }}" type="time">
             </label>
 
             <label>
                 Stop
-                <input class="form-control" value="{{ stoptime | date: 'H:m:ss' }}" type="time">
+                <input ng-change="edit()" class="form-control" value="{{ stoptime | date: 'H:m:ss' }}" type="time">
             </label>
+
+            <label>
+                Pauze (in minuten)
+                <input type="number" class="form-control">
+            </label>
+
 
 
             <button ng-click="timer()" class="btn btn-success glyphicon glyphicon-{{ action }}" style="font-size: 30px;"></button>
 
-            <button class="btn btn-primary">Opslaan</button>
+            <button class="btn btn-primary" ng-click="save()">Opslaan</button>
 
 
             <button class="btn glyphicon glyphicon-map-marker"></button>
 
         </div>
     </form>
+
+    <table class="table">
+        <tr>
+            <th>la</th>
+            <th>laa</th>
+            <th>laaa</th>
+            <th>laaaa</th>
+        </tr>
+        <tr>
+            <td>#1</td>
+            <td>blaat</td>
+            <td>blaat</td>
+            <td>blaat</td>
+        </tr>
+        <tr>
+            <td>#2</td>
+            <td>blaat</td>
+            <td>blaat</td>
+            <td>blaat</td>
+        </tr>
+        <tr>
+            <td>#3</td>
+            <td>blaat</td>
+            <td>blaat</td>
+            <td>blaat</td>
+        </tr>
+    </table>
+
 </div>
